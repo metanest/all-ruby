@@ -1,0 +1,11 @@
+--- object.c-	2024-03-20 18:59:27.641975000 +0900
++++ object.c	2024-03-20 19:00:04.743742000 +0900
+@@ -18,7 +18,7 @@
+ VALUE cObject;
+ VALUE cModule;
+ VALUE cClass;
+-VALUE cFixnum;
++extern VALUE cFixnum;
+ VALUE cData;
+ 
+ static VALUE cNilClass;

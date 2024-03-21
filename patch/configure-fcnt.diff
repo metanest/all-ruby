@@ -1,0 +1,56 @@
+--- configure-	2024-03-20 21:22:20.250948000 +0900
++++ configure	2024-03-20 21:30:05.844341000 +0900
+@@ -2165,7 +2165,7 @@
+ fi
+ rm -f conftest*
+ 
+-if test "$rb_cv_fcnt=" = ""; then
++if test "$rb_cv_fcnt" = ""; then
+     cat > conftest.$ac_ext <<EOF
+ #line 2171 "configure"
+ #include "confdefs.h"
+@@ -2182,7 +2182,7 @@
+ rm -f conftest*
+ 
+ fi
+-if test "$rb_cv_fcnt=" = ""; then
++if test "$rb_cv_fcnt" = ""; then
+     cat > conftest.$ac_ext <<EOF
+ #line 2188 "configure"
+ #include "confdefs.h"
+@@ -2199,7 +2199,7 @@
+ rm -f conftest*
+ 
+ fi
+-if test "$rb_cv_fcnt=" = ""; then
++if test "$rb_cv_fcnt" = ""; then
+     cat > conftest.$ac_ext <<EOF
+ #line 2205 "configure"
+ #include "confdefs.h"
+@@ -2212,20 +2212,23 @@
+ if eval $ac_compile; then
+   rm -rf conftest*
+   rb_cv_fcnt="readCount"
++else
++  rm -rf conftest*
++  rb_cv_fcnt="not found"
+ fi
+ rm -f conftest*
+ 
+ fi
+ fi
+ 
+-if test "$rb_cv_fcnt"; then
++if test "$rb_cv_fcnt" = "not found"; then
++  echo "$ac_t""not found(OK if using GNU libc)" 1>&6
++else
+   echo "$ac_t""$rb_cv_fcnt" 1>&6
+   cat >> confdefs.h <<EOF
+ #define FILE_COUNT $rb_cv_fcnt
+ EOF
+ 
+-else
+-  echo "$ac_t""not found(OK if using GNU libc)" 1>&6
+ fi
+ 
+ if test "$ac_cv_func_getpwent" = yes; then

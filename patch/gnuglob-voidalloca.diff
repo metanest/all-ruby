@@ -1,0 +1,9 @@
+--- gnuglob.c-	2024-03-21 13:14:11.890614000 +0900
++++ gnuglob.c	2024-03-21 13:14:21.411558000 +0900
+@@ -92,5 +92,5 @@
+ #include <alloca.h>
+ #else
+-char *alloca ();
++void *alloca ();
+ #endif
+ 

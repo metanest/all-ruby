@@ -1,0 +1,11 @@
+--- ext/Makefile.in-	2024-03-21 11:51:33.358766000 +0900
++++ ext/Makefile.in	2024-03-21 11:51:49.556286000 +0900
+@@ -31,7 +31,7 @@
+ 		@rm -f core ruby *~ Makefile
+ 
+ .o.so:
+-	ld -o $*.so $*.o
++	ld -shared -o $*.so $*.o
+ 
+ # Prevent GNU make v3 from overflowing arg limit on SysV.
+ .NOEXPORT:

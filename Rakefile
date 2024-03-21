@@ -364,6 +364,13 @@ class RubySource
     elsif version_between('0.51', '0.76')
       patch srcdir, 'error-error'
     end
+    if version_between('0.99.4-961224', '1.0-961225')
+      patch srcdir, 'error-sysnerr'
+    elsif version_between('1.0-971002', '1.4.2')
+      patch srcdir, 'error-sysnerr2'
+    elsif version_between('1.4.3', '1.6.4')
+      patch srcdir, 'error-sysnerr3'
+    end
     if version_between('0.49', '0.76')
       modify_file("#{build_reldir}/#{srcdir}/io.c") {|content|
         content.gsub!(/->_gptr/, "->_IO_read_ptr")
@@ -390,10 +397,16 @@ class RubySource
     if version_eq('0.69')
       patch srcdir, 'regex-re_match_2'
     end
-    if version_eq('0.54')
-      patch srcdir, 'gnuglob-alloca2'
-    elsif version_between('0.55', '0.65')
-      patch srcdir, 'gnuglob-alloca'
+    if RbConfig::CONFIG['arch'] =~ /linux/
+      if version_eq('0.54')
+        patch srcdir, 'gnuglob-alloca2'
+      elsif version_between('0.55', '0.65')
+        patch srcdir, 'gnuglob-alloca'
+      end
+    elsif RbConfig::CONFIG['arch'] =~ /freebsd/
+      if version_between('0.54', '0.65')
+        patch srcdir, 'gnuglob-voidalloca'
+      end
     end
     if version_between('0.51', '0.60')
       patch srcdir, 'gnuglob-dirent'
@@ -401,14 +414,57 @@ class RubySource
     if version_eq('2.4.0-preview1')
       patch srcdir, 'inline-vm_getivar'
     end
-    if version_between('0.99.4-961224', '1.6.8')
-      patch srcdir, 'glibc-stdio'
-    elsif version_eq('0.95')
-      patch srcdir, 'glibc-stdio2'
-    elsif version_eq('0.76')
-      patch srcdir, 'glibc-stdio3'
-    elsif version_between('0.69', '0.73-950413')
-      patch srcdir, 'glibc-stdio4'
+    #if version_between('0.99.4-961224', '1.6.8')
+    #  patch srcdir, 'glibc-stdio'
+    #elsif version_eq('0.95')
+    #  patch srcdir, 'glibc-stdio2'
+    #elsif version_eq('0.76')
+    #  patch srcdir, 'glibc-stdio3'
+    #elsif version_between('0.69', '0.73-950413')
+    #  patch srcdir, 'glibc-stdio4'
+    #end
+    if version_between('1.1b0', '1.3.1-990311')
+      modify_file("#{build_reldir}/#{srcdir}/intern.h") {|content|
+        content.gsub(/int eaccess _\(\(char ?\*, int\)\);/, 'int eaccess _((char const *, int));')
+      }
+    end
+    if version_between('0.49', '1.3.1-990311')
+      patch srcdir, 'file-eaccess'
+    end
+    if version_between('1.3.3-990430', '1.3.3-990507')
+      patch srcdir, 'socket-ipv6'
+    end
+
+    if version_between('0.49', '0.76')
+      patch srcdir, 'range-extern'
+    end
+    if version_between('0.64', '0.73-950413')
+      patch srcdir, 'envh-extern'
+    end
+    if version_between('0.95', '1.1b1')
+      patch srcdir, 'range-extern2'
+    end
+    if version_between('0.99.4-961224', '1.1b3')
+      patch srcdir, 'object-extern'
+    end
+    if version_between('1.0-971002', '1.1b3')
+      patch srcdir, 'class-extern'
+    end
+
+    if version_eq('0.95')
+      patch srcdir, 'configure-fcnt'
+    end
+    if version_eq('0.73-950413')
+      patch srcdir, 'extmakefile-ldshared'
+    end
+    if version_eq('0.73')
+      patch srcdir, 'configure-dln'
+    end
+    if version_between('0.55', '0.69')
+      patch srcdir, 'defines-nodln'
+    end
+    if version_eq('0.73')
+      patch srcdir, 'makefile-extmake'
     end
     if version_lt('1.8.0')
       :build_ruby32

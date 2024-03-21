@@ -1,0 +1,23 @@
+--- ext/socket/extconf.rb-	2024-03-20 16:02:05.568532000 +0900
++++ ext/socket/extconf.rb	2024-03-20 16:02:59.758408000 +0900
+@@ -102,13 +102,13 @@
+   if $ipv6lib
+     if File.directory? $ipv6libdir and File.exist? "#{$ipv6libdir}/lib#{$ipv6lib}.a"
+       $LDFLAGS += " -L#$ipv6libdir -l#$ipv6lib"
+-    else
+-      print <<EOS
+-Fatal: no #$ipv6lib library found.  cannot continue.
+-You need to fetch lib#{$ipv6lib}.a from appropriate
+-ipv6 kit and compile beforehand.
+-EOS
+-      exit
++#    else
++#      print <<EOS
++#Fatal: no #$ipv6lib library found.  cannot continue.
++#You need to fetch lib#{$ipv6lib}.a from appropriate
++#ipv6 kit and compile beforehand.
++#EOS
++#      exit
+     end
+   end
+ end

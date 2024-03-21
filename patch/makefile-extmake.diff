@@ -1,0 +1,18 @@
+--- Makefile.in-	2024-03-21 12:19:53.309932000 +0900
++++ Makefile.in	2024-03-21 12:24:42.493802000 +0900
+@@ -68,13 +68,13 @@
+ 
+ PROGRAM	      = ruby
+ 
+-all:		$(PROGRAM) @EXTMAKE@
++all:		$(PROGRAM)
+ 
+ $(PROGRAM):     $(OBJS)
+ 		@rm -f $(PROGRAM)
+ 		$(PURIFY) $(CC) $(STATIC) $(LDFLAGS) $(OBJS) $(LIBS) -o $(PROGRAM)
+ 
+-extmake:;	cd ext; make
++#extmake:;	cd ext; make
+ 
+ $(bindir)/$(PROGRAM): $(PROGRAM)
+ 	$(INSTALL_PROGRAM) $(PROGRAM) $(bindir)/$(PROGRAM)

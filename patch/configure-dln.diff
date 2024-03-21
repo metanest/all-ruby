@@ -1,0 +1,14 @@
+--- configure-	2024-03-21 11:55:15.913252000 +0900
++++ configure	2024-03-21 11:54:59.861959000 +0900
+@@ -2236,7 +2236,10 @@
+   cat > conftest.$ac_ext <<EOF
+ #line 2238 "configure"
+ #include "confdefs.h"
+-#include "config.h"
++
++#define USE_MY_DLN
++#include "dln.c"
++
+ int main() { return 0; }
+ int t() {
+ 

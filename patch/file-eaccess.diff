@@ -1,0 +1,11 @@
+--- file.c-	2024-03-20 15:37:37.324022000 +0900
++++ file.c	2024-03-20 15:38:00.041661000 +0900
+@@ -287,7 +287,7 @@
+ 
+ int
+ eaccess(path, mode)
+-     char *path;
++     char const *path;
+      int mode;
+ {
+   extern int group_member ();

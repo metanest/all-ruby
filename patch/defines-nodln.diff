@@ -1,0 +1,10 @@
+--- defines.h-	2024-03-21 12:39:03.848046000 +0900
++++ defines.h	2024-03-21 12:41:04.302403000 +0900
+@@ -20,6 +20,7 @@
+ 
+ /* define USE_DLN to load object file(.o). */
+ #define USE_DLN
++#undef USE_DLN
+ #ifdef USE_DLN
+ #define LIBC_NAME "libc.a"
+ #define DLN_DEFAULT_PATH "/lib:/usr/lib:."
